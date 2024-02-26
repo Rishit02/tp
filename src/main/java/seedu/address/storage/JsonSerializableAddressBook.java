@@ -56,5 +56,5 @@ class JsonSerializableAddressBook {
         }
         return addressBook;
     }
-
 }
+
