@@ -64,7 +64,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     // empty string not allowed for descriptions
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION;
-    public static final String INVALID_NOK_DESC = " " + PREFIX_NOK; // empty string not allowed for next of kin
+    public static final String INVALID_NOK_DESC = " " + PREFIX_NOK + "James&"; // empty string not allowed for next of kin
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

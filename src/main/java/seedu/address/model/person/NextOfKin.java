@@ -11,7 +11,6 @@ public class NextOfKin {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
-
     /*
      * The first character of the next of kin must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -35,6 +34,9 @@ public class NextOfKin {
      * Returns true if a given string is a valid next of kin.
      */
     public static boolean isValidNextOfKin(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
