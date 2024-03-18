@@ -13,11 +13,11 @@ public class NextOfKinTest {
         assertThrows(NullPointerException.class, () -> new NextOfKin(null));
     }
 
-//    @Test
-//    public void constructor_invalidNextOfKin_throwsIllegalArgumentException() {
-//        String invalidNextOfKin = "";
-//        assertThrows(IllegalArgumentException.class, () -> new NextOfKin(invalidNextOfKin));
-//    }
+    @Test
+    public void constructor_invalidNextOfKin_throwsIllegalArgumentException() {
+        String invalidNextOfKin = "James&";
+        assertThrows(IllegalArgumentException.class, () -> new NextOfKin(invalidNextOfKin));
+    }
 
     @Test
     public void isValidNextOfKin() {
