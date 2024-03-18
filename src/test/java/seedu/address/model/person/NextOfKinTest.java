@@ -25,10 +25,10 @@ public class NextOfKinTest {
         assertThrows(NullPointerException.class, () -> NextOfKin.isValidNextOfKin(null));
 
         // invalid next of kins
-//        assertFalse(NextOfKin.isValidNextOfKin("")); // empty string
         assertFalse(NextOfKin.isValidNextOfKin(" ")); // spaces only
 
         // valid next of kins
+        assertTrue(NextOfKin.isValidNextOfKin("")); // empty string
         assertTrue(NextOfKin.isValidNextOfKin("Sam Sung"));
         assertTrue(NextOfKin.isValidNextOfKin("Alexander Maximilian Bartholomew Fitzwilliam III")); // long next of kin
     }
