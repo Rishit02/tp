@@ -47,6 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOK,
                 PREFIX_DESCRIPTION);
+
+        // Compulsory fields
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -54,10 +56,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        NextOfKin nextOfKin = new NextOfKin("");
-        if (argMultimap.getValue(PREFIX_NOK).isPresent()) {
-            nextOfKin = ParserUtil.parseNextOfKin(argMultimap.getValue(PREFIX_NOK).get());
-        }
+        // Optional fields
+        // Get the value associated with the PREFIX_NOK key, or an empty string if it's not present
+        String nextOfKinValue = argMultimap.getValue(PREFIX_NOK).orElse("");
+        // Parse the nextOfKinValue into a NextOfKin object
+        NextOfKin nextOfKin = ParserUtil.parseNextOfKin(nextOfKinValue);
 
         Person person = new Person(name, phone, email, address, description, nextOfKin, tagList);
 
