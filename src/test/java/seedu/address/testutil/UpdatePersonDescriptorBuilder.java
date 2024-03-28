@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,6 +15,8 @@ import seedu.address.model.person.NextOfKin;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
+import javax.swing.text.html.Option;
 
 /**
  * A utility class to help with building UpdatePersonDescriptor objects.
@@ -88,7 +91,7 @@ public class UpdatePersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code UpdatePersonDescriptor} that we are building.
      */
     public UpdatePersonDescriptorBuilder withNextOfKin(String nextOfKin) {
-        descriptor.setNextOfKin(new NextOfKin(nextOfKin));
+        descriptor.setNextOfKin(Optional.of(new NextOfKin(nextOfKin)));
         return this;
     }
 

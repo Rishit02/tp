@@ -119,7 +119,7 @@ public class UpdateCommand extends Command {
         Address updatedAddress = updatePersonDescriptor.getAddress().orElse(personToUpdate.getAddress());
         Description updatedDescription = updatePersonDescriptor.getDescription().orElse(personToUpdate
                 .getDescription());
-        NextOfKin updatedNextOfKin = updatePersonDescriptor.getNextOfKin().orElse(personToUpdate.getNextOfKin());
+        Optional<NextOfKin> updatedNextOfKin = Optional.of(updatePersonDescriptor.getNextOfKin().orElse(personToUpdate.getNextOfKin().get()));
         Set<Tag> updatedTags = updatePersonDescriptor.getTags().orElse(personToUpdate.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
@@ -161,7 +161,7 @@ public class UpdateCommand extends Command {
         private Email email;
         private Address address;
         private Description description;
-        private NextOfKin nextOfKin;
+        private Optional<NextOfKin> nextOfKin;
         private Set<Tag> tags;
 
         public UpdatePersonDescriptor() {}
@@ -227,12 +227,12 @@ public class UpdateCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setNextOfKin(NextOfKin nextOfKin) {
+        public void setNextOfKin(Optional<NextOfKin> nextOfKin) {
             this.nextOfKin = nextOfKin;
         }
 
         public Optional<NextOfKin> getNextOfKin() {
-            return Optional.ofNullable(nextOfKin);
+            return nextOfKin;
         }
 
         /**

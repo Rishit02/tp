@@ -1,13 +1,22 @@
 package seedu.address.storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
@@ -18,6 +27,8 @@ import seedu.address.model.person.NextOfKin;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
+import javax.swing.text.html.Option;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -42,6 +53,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("description") String description, @JsonProperty("nextOfKin") String nextOfKin,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,12 +69,19 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new Jdk8Module());
+        try {
+            nextOfKin = mapper.writeValueAsString(source.getNextOfKin());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         description = source.getDescription().value;
-        nextOfKin = source.getNextOfKin().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -120,14 +139,22 @@ class JsonAdaptedPerson {
         }
         final Description modelDescription = new Description(description);
 
-        if (nextOfKin == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    NextOfKin.class.getSimpleName()));
+        // Optional fields
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new Jdk8Module());
+
+        final Optional<NextOfKin> modelNextOfKin;
+        try {
+            if (nextOfKin.equals("null")) {
+                modelNextOfKin = Optional.ofNullable(null);
+            } else {
+                JsonNode rootNode = mapper.readTree(nextOfKin);
+                String nextOfKinValue = rootNode.get("value").asText();
+                modelNextOfKin = Optional.of(new NextOfKin(nextOfKinValue));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        if (!NextOfKin.isValidNextOfKin(nextOfKin)) {
-            throw new IllegalValueException(NextOfKin.MESSAGE_CONSTRAINTS);
-        }
-        final NextOfKin modelNextOfKin = new NextOfKin(nextOfKin);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDescription, modelNextOfKin, modelTags);

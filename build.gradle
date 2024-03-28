@@ -63,6 +63,8 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.6'
 }
 
 shadowJar {
