@@ -31,7 +31,6 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
     private final String name;
     private final String phone;
     private final String email;
@@ -136,15 +135,23 @@ class JsonAdaptedPerson {
 
         // Optional fields
         ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new Jdk8Module());
-
+        mapper.registerModule(new Jdk8Module()); // register mapper
         final Optional<NextOfKin> modelNextOfKin;
         try {
-            if (nextOfKin.equals("null")) {
-                modelNextOfKin = Optional.ofNullable(null);
+            if (nextOfKin == null || nextOfKin.equals("null")) {
+                modelNextOfKin = Optional.empty(); // If no next of kin value was specified, create an empty Optional
             } else {
-                JsonNode rootNode = mapper.readTree(nextOfKin);
-                String nextOfKinValue = rootNode.get("value").asText();
+                String nextOfKinValue;
+                if (isValidJson(nextOfKin)) { // If there is valid JSON then nextOfKin was stored as an Optional
+                    JsonNode rootNode = mapper.readTree(nextOfKin);
+                    nextOfKinValue = rootNode.get("value").asText();
+                } else { // next of kin was stored as a String
+                    nextOfKinValue = nextOfKin;
+                }
+                // Check that the nextOfKinValue contains a valid string
+                if (!NextOfKin.isValidNextOfKin(nextOfKinValue)) {
+                    throw new IllegalValueException(NextOfKin.MESSAGE_CONSTRAINTS);
+                }
                 modelNextOfKin = Optional.of(new NextOfKin(nextOfKinValue));
             }
         } catch (IOException e) {
@@ -153,6 +160,18 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDescription, modelNextOfKin, modelTags);
+    }
+    private boolean isValidJson(String jsonString) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new Jdk8Module());
+        try {
+            mapper.readTree(jsonString);
+            return true; // If parsing succeeds, the string is valid JSON
+        } catch (JsonProcessingException e) {
+            return false; // If parsing fails, the string is not valid JSON
+        } catch (IOException e) {
+            return false;
+        }
     }
 
 }

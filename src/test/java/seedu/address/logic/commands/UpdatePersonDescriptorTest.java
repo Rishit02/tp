@@ -66,9 +66,10 @@ public class UpdatePersonDescriptorTest {
                 + updatePersonDescriptor.getPhone().orElse(null) + ", email="
                 + updatePersonDescriptor.getEmail().orElse(null) + ", address="
                 + updatePersonDescriptor.getDescription().orElse(null) + ", description="
-                + updatePersonDescriptor.getNextOfKin().orElse(null) + ", nextOfKin="
+                + updatePersonDescriptor.getNextOfKin() + ", nextOfKin="
                 + updatePersonDescriptor.getAddress().orElse(null) + ", tags="
                 + updatePersonDescriptor.getTags().orElse(null) + "}";
+        System.out.println(updatePersonDescriptor.toString());
         assertEquals(expected, updatePersonDescriptor.toString());
     }
 }

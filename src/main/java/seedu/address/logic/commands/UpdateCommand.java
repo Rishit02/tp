@@ -119,7 +119,7 @@ public class UpdateCommand extends Command {
         Address updatedAddress = updatePersonDescriptor.getAddress().orElse(personToUpdate.getAddress());
         Description updatedDescription = updatePersonDescriptor.getDescription().orElse(personToUpdate
                 .getDescription());
-        Optional<NextOfKin> updatedNextOfKin = Optional.of(updatePersonDescriptor.getNextOfKin()
+        Optional<NextOfKin> updatedNextOfKin = Optional.ofNullable(updatePersonDescriptor.getNextOfKin()
                 .orElse(personToUpdate.getNextOfKin().get()));
         Set<Tag> updatedTags = updatePersonDescriptor.getTags().orElse(personToUpdate.getTags());
 
