@@ -44,6 +44,8 @@ public class StorageManagerTest {
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
+        System.out.println("Original\n" + original);
+        System.out.println("Retrieved\n" + retrieved);
         assertEquals(original, retrieved);
     }
 
