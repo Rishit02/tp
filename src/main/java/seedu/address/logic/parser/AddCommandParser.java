@@ -24,8 +24,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import javax.swing.text.html.Option;
-
 /**
  * Parses input arguments and creates a new AddCommand object.
  */

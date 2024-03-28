@@ -68,7 +68,8 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
                     ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
         if (argMultimap.getValue(PREFIX_NOK).isPresent()) {
-            updatePersonDescriptor.setNextOfKin(Optional.of(ParserUtil.parseNextOfKin(argMultimap.getValue(PREFIX_NOK).get())));
+            updatePersonDescriptor.setNextOfKin(Optional.of(ParserUtil.parseNextOfKin(argMultimap.getValue(PREFIX_NOK)
+                    .get())));
         }
         parseTagsForUpdate(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(updatePersonDescriptor::setTags);
 
