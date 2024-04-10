@@ -75,7 +75,6 @@ public class FindCommandParserTest {
                 new KinContainsKeywordsPredicate(kinKeywords2),
                 new DescriptionContainsKeywordsPredicate(descriptionKeywords2));
         assertParseSuccess(parser, FIND_BOB, expectedCommand2);
-
     }
 
 }
