@@ -77,6 +77,8 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
     public static final String UPDATE_DESC_AMY = " " + PREFIX_UPDATE + VALID_DESCRIPTION_AMY;
     public static final String UPDATE_DESC_BOB = " " + PREFIX_UPDATE + VALID_DESCRIPTION_BOB;
+    public static final String FIND_AMY = "find " + NAME_DESC_AMY;
+    public static final String FIND_BOB = "find" + NAME_DESC_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
