@@ -13,10 +13,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
@@ -24,9 +25,6 @@ import seedu.address.model.person.KinContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
-
-import java.util.List;
-
 
 public class FindCommandParserTest {
 
