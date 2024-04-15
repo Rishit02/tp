@@ -678,15 +678,17 @@ _This command allows you to add an appointment with the specified parameters._
 
 &nbsp;
 
-<box type="tip">
+<box type="info">
 
-Note: Ensure that all the commas are placed correctly in the TIME parameter.
+**Note:** Make sure to capitalize the "AM" or "PM" indicator in the TIME parameter.
 </box>
 
 <box type="tip">
 
-Note: Make sure to capitalize the "AM" or "PM" indicator in the TIME parameter.
+**Tip:** Please ensure that all commas in the TIME parameter are correctly placed.
 </box>
+
+
 
 Once the command is entered, the event should be added to the events panel on the right of the application.
 
