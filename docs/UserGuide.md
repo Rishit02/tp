@@ -689,7 +689,6 @@ _This command allows you to add an appointment with the specified parameters._
 </box>
 
 
-
 Once the command is entered, the event should be added to the events panel on the right of the application.
 
 **Examples:**
@@ -736,11 +735,18 @@ _This command allows you to remove an appointment with the specified parameters.
 
 Once the command is entered, the event should be removed from the events panel on the right of the application.
 
+<box type="tip">
+
+**Tip:** Make sure there are no extra spaces between words in the heading.
+</box>
+
 **Examples:**
 -   `schedule delete h/Meeting with Client`
 -   `schedule delete h/Discharge plan meeting`
+
 <box type="info">
-It is only possible to delete an event if the heading exists in the events panel on the right of the application.
+
+**Note:** It is only possible to delete an event if the heading exists in the events panel on the right of the application.
 </box>
 
 **Walkthrough:**
